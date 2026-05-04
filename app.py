@@ -13,23 +13,21 @@ app = Flask(__name__,
 
 CORS(app)
 
-# ====================== СТРАНИЦЫ ======================
+# ====================== ГЛАВНЫЕ СТРАНИЦЫ ======================
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/index.html')
-@app.route('/menu.html')
-@app.route('/quiz.html')
-@app.route('/register.html')
-@app.route('/login.html')
-@app.route('/delivery.html')
-@app.route('/philosophy.html')
-def render_page():
-    page = request.path.strip('/')
-    if page == '':
-        page = 'index.html'
-    return render_template(page)
+@app.route('/<path:page>')
+def render_any_page(page):
+    if page.endswith('.html') or page in ['index', 'menu', 'quiz', 'register', 'login', 'delivery', 'philosophy']:
+        if not page.endswith('.html'):
+            page += '.html'
+        try:
+            return render_template(page)
+        except:
+            return "Page not found", 404
+    return "File not found", 404
 
 # ====================== API ======================
 USER_DATA_FILE = "users.json"
@@ -44,12 +42,27 @@ def register():
                 users_list = json.load(file)
             except:
                 users_list = []
-
     users_list.append(new_user)
     with open(USER_DATA_FILE, "w", encoding="utf-8") as file:
         json.dump(users_list, file, ensure_ascii=False, indent=4)
-
     return jsonify({"status": "success", "message": "Тіркелу сәтті аяқталды!"})
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.json
+    email = data.get("email")
+    password = data.get("password")
+    if not os.path.exists(USER_DATA_FILE):
+        return jsonify({"status": "error", "message": "Пайдаланушы табылмады"})
+    with open(USER_DATA_FILE, "r", encoding="utf-8") as file:
+        try:
+            users = json.load(file)
+        except:
+            return jsonify({"status": "error", "message": "База қате"})
+    for user in users:
+        if user.get("email") == email and user.get("password") == password:
+            return jsonify({"status": "success", "message": "Қош келдіңіз!"})
+    return jsonify({"status": "error", "message": "Email немесе пароль қате!"})
 
 @app.route("/generate_password")
 def generate_password():
@@ -57,43 +70,7 @@ def generate_password():
     password = ''.join(random.choice(characters) for _ in range(10))
     return jsonify({"password": password})
 
-@app.route("/check_password", methods=["POST"])
-def check_password():
-    data = request.json
-    password = data.get("password", "")
-    errors = []
-    if len(password) < 8: errors.append("Кемінде 8 символ керек")
-    if not re.search("[A-Z]", password): errors.append("Бас әріп керек")
-    if not re.search("[0-9]", password): errors.append("Сан керек")
-    if not re.search("[!@#$%^&*]", password): errors.append("Арнайы символ керек")
-
-    if len(errors) == 0:
-        return jsonify({"status":"strong"})
-    else:
-        return jsonify({"status":"weak","errors":errors})
-
-@app.route("/login", methods=["POST"])
-def login():
-    data = request.json
-    email = data.get("email")
-    password = data.get("password")
-
-    if not os.path.exists(USER_DATA_FILE):
-        return jsonify({"status": "error", "message": "Пайдаланушы табылмады"})
-
-    with open(USER_DATA_FILE, "r", encoding="utf-8") as file:
-        try:
-            users = json.load(file)
-        except:
-            return jsonify({"status": "error", "message": "База қате"})
-
-    for user in users:
-        if user.get("email") == email and user.get("password") == password:
-            return jsonify({"status": "success", "message": "Қош келдіңіз!", "user": user.get("name", "Пайдаланушы")})
-
-    return jsonify({"status": "error", "message": "Email немесе пароль қате!"})
-
-# 🎲 Кубик (твой оригинальный код)
+# 🎲 Кубик
 last_played = {}
 @app.route("/roll_dice", methods=["POST"])
 def roll_dice():
@@ -104,7 +81,6 @@ def roll_dice():
     now = time.time()
     if email in last_played and (now - last_played[email] < 60):
         return jsonify({"status": "wait", "message": "Күте тұрыңыз!"})
-    
     results = [random.randint(1, dice_type) for _ in range(num_dice)]
     last_played[email] = now
     return jsonify({"status":"ok", "results": results, "total": sum(results)})
