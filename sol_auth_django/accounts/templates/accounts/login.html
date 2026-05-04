@@ -1,0 +1,26 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Кіру | SOL{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h1>SOL</h1>
+        <h2>Кіру</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <input type="text" name="username" placeholder="Пайдаланушы аты немесе Email" required class="auth-input">
+            <input type="password" name="password" placeholder="Пароль" required class="auth-input">
+
+            <button type="submit" class="register-btn">Кіру</button>
+        </form>
+
+        <p class="switch-auth">
+            Аккаунтыңыз жоқ па? 
+            <a href="{% url 'register' %}" style="color:#ff9800;">Тіркелу</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

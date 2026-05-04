@@ -1,0 +1,25 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Мәзір - SOL{% endblock %}
+
+{% block content %}
+    <h1 style="text-align:center; margin:30px 0;">SOL мейрамханасының мәзірі</h1>
+    
+    <div class="dishes">
+        {% for dish in dishes %}
+            <div class="dish">
+                <h3>{{ dish.name }}</h3>
+                <p>{{ dish.description|default:"Сипаттама жоқ" }}</p>
+                <p><strong>{{ dish.price }} тг</strong></p>
+                <small>Категория: {{ dish.get_category_display }}</small>
+                {% if dish.is_available %}
+                    <span style="color:green;">✓ Қолжетімді</span>
+                {% else %}
+                    <span style="color:red;">✗ Уақытша жоқ</span>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p style="text-align:center; font-size:18px;">Әзірге тағамдар қосылмаған.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

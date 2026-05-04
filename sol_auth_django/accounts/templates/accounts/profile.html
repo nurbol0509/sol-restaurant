@@ -1,0 +1,44 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Менің профилім | SOL{% endblock %}
+
+{% block content %}
+    <h2 style="text-align:center; margin-bottom:30px;">Менің профилім</h2>
+
+    <div style="text-align:center; margin-bottom:40px;">
+        {% if user.profile_picture and user.profile_picture.url %}
+            <img src="{{ user.profile_picture.url }}" 
+                 alt="Менің фото" 
+                 style="width:180px; height:180px; border-radius:50%; object-fit:cover; border:6px solid #ff9800; box-shadow:0 0 25px rgba(255,152,0,0.6);">
+        {% else %}
+            <img src="/media/profile_pics/default_avatar.png" 
+                 alt="Дефолт фото" 
+                 style="width:180px; height:180px; border-radius:50%; object-fit:cover; border:6px solid #ff9800;">
+        {% endif %}
+    </div>
+
+    <div style="max-width:500px; margin:0 auto; text-align:center; font-size:18px;">
+        <p><strong>Аты-жөні:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>О себе:</strong> {{ user.bio|default:"—" }}</p>
+    </div>
+
+    <hr style="margin:40px 0; border-color:#444;">
+
+    <h3 style="text-align:center; margin-bottom:20px;">Фотоны өзгерту</h3>
+    
+    <form method="POST" enctype="multipart/form-data" style="max-width:420px; margin:0 auto;">
+        {% csrf_token %}
+        <input type="file" name="profile_picture" accept="image/jpeg,image/png,image/webp" 
+               style="margin-bottom:15px; width:100%;">
+        <button type="submit" style="width:100%; padding:14px; background:#ff9800; color:#000; border:none; border-radius:10px; font-weight:bold; font-size:16px;">
+            Жаңа фото жүктеу
+        </button>
+    </form>
+
+    <div style="text-align:center; margin-top:50px;">
+        <a href="{% url 'home' %}" style="color:#ff9800; text-decoration:none; font-size:16px;">
+            ← Басты бетке оралу
+        </a>
+    </div>
+{% endblock %}

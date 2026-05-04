@@ -1,0 +1,179 @@
+.quiz-section {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(228, 253, 0, 0.529);
+    font-family: Arial, sans-serif;
+}
+
+.quiz-section h2 {
+    text-align: center;
+    color: #fbfbfb;
+    margin-bottom: 30px;
+}
+
+.question-card {
+    background: #222;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 12px rgb(251, 255, 0);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.question-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgb(238, 255, 0);
+}
+
+.question-card p {
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+}
+
+.options label {
+    margin: 4px 0;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.options label:hover {
+    background: rgba(0, 255, 255, 0.1);
+}
+
+input[type="text"], input[type="number"], select {
+    width: 50%;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid rgb(255, 217, 0);
+    background: #111;
+    color: white;
+    margin-top: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background: rgb(251, 255, 0);
+    color: #000;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+button:hover {
+    background: white;
+    transform: translateY(-2px);
+}
+
+/* Подсветка ответов */
+.correct {
+    background: green !important;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.wrong {
+    background: red !important;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.correct {
+    background: green !important;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+.wrong {
+    background: red !important;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+/* Переключатель темы для основного сайта */
+.theme-btn-main {
+    background: #333;
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 22px;
+    cursor: pointer;
+    margin-left: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: all 0.3s;
+}
+
+.theme-btn-main:hover {
+    background: #ff9800;
+    color: #000;
+    transform: scale(1.1);
+}
+
+.promo-code-box {
+    background: #1a1a1a;
+    border: 2px dashed #ff9800;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 25px 0;
+    text-align: center;
+}
+
+#promoCode {
+    font-size: 28px;
+    letter-spacing: 4px;
+    color: #ff9800;
+    margin: 10px 0;
+    font-family: monospace;
+}
+
+/* ==================== КВИЗ ФОНЫ (МЕНЮ СИЯҚТЫ) ==================== */
+
+body.quiz-page {
+    background: #b5710c;           /* Менюдегі негізгі қара фон */
+    color: #ffffff;
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+.quiz-container {
+    background: #1a1a1a;           /* Сәл ашық қара, карточкалар үшін */
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 40px 30px;
+    border-radius: 16px;
+    border: 1px solid #333;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.quiz-page h1, .quiz-page h2 {
+    color: #ff9800;
+}
+
+/* Сұрақтардың фон */
+.question {
+    background: #222;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    border: 1px solid #444;
+}

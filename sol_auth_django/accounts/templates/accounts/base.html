@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SOL Restaurant{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="dark-mode">
+
+<header class="header">
+    <div class="logo">SOL</div>
+    
+    <div class="right-menu">
+        {% if user.is_authenticated %}
+            <span style="color:#ff9800; margin-right:15px;">Сәлем, {{ user.username }}!</span>
+            <a href="{% url 'profile' %}" class="auth-btn">Профиль</a>
+            <a href="{% url 'logout' %}" class="auth-btn">Шығу</a>
+        {% else %}
+            <a href="{% url 'register' %}" class="register-btn">Тіркелу</a>
+            <a href="{% url 'login' %}" class="auth-btn login">Кіру</a>
+        {% endif %}
+    </div>
+</header>
+
+<!-- Jinja меню навигации -->
+<nav class="main-nav">
+    <a href="{% url 'home' %}" class="nav-link">Басты бет</a>
+    <a href="{% url 'dish_list' %}" class="nav-link active">Мәзір</a>
+</nav>
+
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
+
+{% block extra_js %}{% endblock %}
+
+<!-- Переключатель темы -->
+<button id="theme-toggle" class="theme-btn">☀️</button>
+
+<script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    toggleBtn.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        body.classList.toggle('light-mode');
+        
+        if (body.classList.contains('light-mode')) {
+            toggleBtn.textContent = '🌙';
+        } else {
+            toggleBtn.textContent = '☀️';
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block title %}Тіркелу | SOL{% endblock %}
+
+{% block content %}
+<div class="register-page">
+    <div class="register-card">
+        <h1 class="logo">SOL</h1>
+        <h2>Тіркелу</h2>
+
+        <form method="POST" id="registerForm">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Аты-жөні</label>
+                <input type="text" name="username" id="username" placeholder="Толық атыңыз" required>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" id="email" placeholder="email@example.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Құпия сөз</label>
+                <div class="password-wrapper">
+                    <input type="password" name="password1" id="password1" placeholder="Құпия сөз" required>
+                    <button type="button" id="togglePassword" class="toggle-btn">👁</button>
+                    <button type="button" id="generatePassword" class="generate-btn">🔐</button>
+                </div>
+            </div>
+
+            <div class="password-requirements">
+                <p id="req-length">● Кемінде 8 таңба</p>
+                <p id="req-upper">● Бір бас әріп (A-Z)</p>
+                <p id="req-lower">● Бір кіші әріп (a-z)</p>
+                <p id="req-number">● Бір сан (0-9)</p>
+                <p id="req-special">● Арнайы таңба (!@#$%^&*)</p>
+            </div>
+
+            <div class="form-group">
+                <label>Құпия сөзді қайталаңыз</label>
+                <input type="password" name="password2" id="password2" placeholder="Құпия сөзді қайталаңыз" required>
+            </div>
+
+            <button type="submit" class="submit-btn">Тіркелу</button>
+        </form>
+
+        <div class="footer-link">
+            Аккаунтыңыз бар ма? 
+            <a href="{% url 'login' %}">Кіру</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const password1 = document.getElementById('password1');
+    const toggleBtn = document.getElementById('togglePassword');
+    const generateBtn = document.getElementById('generatePassword');
+
+    // Глаз
+    toggleBtn.addEventListener('click', () => {
+        if (password1.type === 'password') {
+            password1.type = 'text';
+            toggleBtn.textContent = '🙈';
+        } else {
+            password1.type = 'password';
+            toggleBtn.textContent = '👁';
+        }
+    });
+
+    // Генерация пароля
+    generateBtn.addEventListener('click', () => {
+        fetch("http://127.0.0.1:5000/generate_password")
+            .then(res => res.json())
+            .then(data => {
+                password1.value = data.password;
+                password1.dispatchEvent(new Event('input'));
+            });
+    });
+
+    // Проверка пароля в реальном времени
+    password1.addEventListener('input', () => {
+        const pass = password1.value;
+        document.getElementById('req-length').style.color = pass.length >= 8 ? '#4ade80' : '#f87171';
+        document.getElementById('req-upper').style.color = /[A-Z]/.test(pass) ? '#4ade80' : '#f87171';
+        document.getElementById('req-lower').style.color = /[a-z]/.test(pass) ? '#4ade80' : '#f87171';
+        document.getElementById('req-number').style.color = /[0-9]/.test(pass) ? '#4ade80' : '#f87171';
+        document.getElementById('req-special').style.color = /[!@#$%^&*]/.test(pass) ? '#4ade80' : '#f87171';
+    });
+});
+</script>
+{% endblock %}

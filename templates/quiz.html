@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <title>Мейрамхана және Тағамдар Викторинасы</title>
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body class="quiz-page">
+
+<section class="quiz-section">
+    <h2>🍽️ Ресторан және тағамдар әлемі</h2>
+    <form id="quizForm">
+
+        <div class="question-card">
+            <p>1. Итальян асханасының ең танымал тағамы қалай аталады?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="Sushi"> Суши</label>
+                <label><input type="radio" name="q1" value="Pizza"> Пицца</label>
+                <label><input type="radio" name="q1" value="Burger"> Бургер</label>
+                <label><input type="radio" name="q1" value="Steak"> Стейк</label>
+                <label><input type="radio" name="q1" value="Taco"> Тако</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>2. Қай тағамдар қазақтың ұлттық асханасына жатады? (Бірнеше нұсқа таңдаңыз)</p>
+            <div class="options">
+                <label><input type="checkbox" name="q2" value="Beshbarmak"> Бесбармақ</label>
+                <label><input type="checkbox" name="q2" value="Pasta"> Паста</label>
+                <label><input type="checkbox" name="q2" value="Baursak"> Бауырсақ</label>
+                <label><input type="checkbox" name="q2" value="Kuirdak"> Қуырдак</label>
+                <label><input type="checkbox" name="q2" value="Ramen"> Рамен</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>3. Ең танымал фаст-фуд желісін таңдаңыз:</p>
+            <select name="q3">
+                <option value="">--Таңдаңыз--</option>
+                <option value="McDonalds">McDonald's</option>
+                <option value="KFC">KFC</option>
+                <option value="BurgerKing">Burger King</option>
+                <option value="Subway">Subway</option>
+                <option value="Starbucks">Starbucks</option>
+            </select>
+        </div>
+
+        <div class="question-card">
+            <p>4. Күріштен жасалатын өзбек ұлттық тағамы:</p>
+            <input type="text" name="q4" placeholder="Мысалы: Палау">
+        </div>
+
+        <div class="question-card">
+            <p>5. Тағамның ащы болуына не әсер етеді?</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="Sugar"> Қант</label>
+                <label><input type="radio" name="q5" value="Salt"> Тұз</label>
+                <label><input type="radio" name="q5" value="Chili"> Чили бұрышы</label>
+                <label><input type="radio" name="q5" value="Oil"> Май</label>
+                <label><input type="radio" name="q5" value="Water"> Су</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>6. Классикалық "Маргарита" пиццасының құрамында неше негізгі ингредиент бар (қамырдан бөлек)?</p>
+            <input type="number" name="q6" min="1" placeholder="Санды енгізіңіз">
+        </div>
+
+        <div class="question-card">
+            <p>7. Суши жасау үшін қолданылатын теңіз балдыры қалай аталады?</p>
+            <div class="options">
+                <label><input type="radio" name="q7" value="Nori"> Нори</label>
+                <label><input type="radio" name="q7" value="Wasabi"> Васаби</label>
+                <label><input type="radio" name="q7" value="Ginger"> Имбирь</label>
+                <label><input type="radio" name="q7" value="Soy"> Соя</label>
+                <label><input type="radio" name="q7" value="Rice"> Күріш</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>8. Сусындар ішетін ыдысты таңдаңыз:</p>
+            <select name="q8">
+                <option value="">--Таңдаңыз--</option>
+                <option value="Glass">Бокал / Стақан</option>
+                <option value="Plate">Тәрелке</option>
+                <option value="Fork">Шанқы (Вилка)</option>
+                <option value="Knife">Пышақ</option>
+                <option value="Spoon">Қасық</option>
+            </select>
+        </div>
+
+        <div class="question-card">
+            <p>9. Кондитерлік өнімдерге не жатады? (Бірнеше нұсқа таңдаңыз)</p>
+            <div class="options">
+                <label><input type="checkbox" name="q9" value="Cake"> Торт</label>
+                <label><input type="checkbox" name="q9" value="Eclair"> Эклер</label>
+                <label><input type="checkbox" name="q9" value="Croissant"> Круассан</label>
+                <label><input type="checkbox" name="q9" value="Soup"> Сорпа</label>
+                <label><input type="checkbox" name="q9" value="Salad"> Салат</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>10. Ресторандағы тағамдар тізімі қалай аталады?</p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="Bill"> Чек</label>
+                <label><input type="radio" name="q10" value="Order"> Тапсырыс</label>
+                <label><input type="radio" name="q10" value="Menu"> Мәзір (Меню)</label>
+                <label><input type="radio" name="q10" value="Recipe"> Рецепт</label>
+                <label><input type="radio" name="q10" value="Discount"> Жеңілдік</label>
+            </div>
+        </div>
+
+        <button type="button" onclick="checkQuiz()">Жіберу</button>
+    </form>
+
+    <h3 id="quizResult"></h3>
+</section>
+
+<script src="quiz.js"></script>
+</body>
+</html>

@@ -1,0 +1,646 @@
+/* django_style.css - Стиль для Django страниц */
+
+body {
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background: #000;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ff9800;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ff9800;
+}
+
+.right-menu {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.auth-btn, .register-btn {
+    padding: 8px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-btn {
+    background: #ff9800;
+    color: #000;
+}
+
+.auth-btn.login {
+    background: #333;
+    color: white;
+}
+
+nav {
+    background: #000;
+    padding: 12px 0;
+    text-align: center;
+    border-bottom: 1px solid #333;
+}
+
+nav a {
+    color: white;
+    margin: 0 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ff9800;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #ff9800;
+    margin-bottom: 30px;
+}
+
+.dishes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.dish {
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #333;
+    transition: 0.3s;
+}
+
+.dish:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(255, 152, 0, 0.4);
+}
+
+.dish h3 {
+    color: #ff9800;
+    margin-bottom: 10px;
+}
+
+.dish p {
+    margin: 8px 0;
+    color: #ddd;
+}
+
+.dish strong {
+    color: #fff;
+    font-size: 1.1em;
+}
+
+
+.main-nav {
+    background: #000;
+    padding: 15px 0;
+    text-align: center;
+    border-bottom: 3px solid #ff9800;
+}
+
+.nav-link {
+    color: white;
+    margin: 0 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: #ff9800;
+}
+
+/* Темы */
+body.dark-mode {
+    background: #111;
+    color: #fff;
+}
+
+body.light-mode {
+    background: #f9f9f9;
+    color: #000;
+}
+
+.theme-btn {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background: #333;
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1200;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+
+/* ==================== РЕГИСТРАЦИЯ - КРАСИВЫЙ ДИЗАЙН ==================== */
+
+.register-wrapper {
+    background: #1a1a1a;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+    max-width: 460px;
+    margin: 40px auto;
+    padding: 50px 40px;
+    text-align: center;
+}
+
+.logo {
+    color: #ff9800;
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.title {
+    color: #ffffff;
+    font-size: 28px;
+    margin-bottom: 35px;
+    font-weight: 500;
+}
+
+.form-group {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    color: #bbbbbb;
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 14px 16px;
+    background: #2a2a2a;
+    border: 1px solid #555;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.auth-input:focus {
+    outline: none;
+    border-color: #ff9800;
+    background: #333333;
+    box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.2);
+}
+
+.password-input-wrapper {
+    position: relative;
+}
+
+.toggle-btn, .generate-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #999;
+    padding: 8px;
+}
+
+.toggle-btn {
+    right: 12px;
+}
+
+.generate-btn {
+    right: 48px;
+}
+
+/* Условия пароля */
+.password-requirements {
+    text-align: left;
+    margin: 15px 0 25px 0;
+    font-size: 14.5px;
+    line-height: 1.9;
+}
+
+.password-requirements p {
+    margin: 5px 0;
+    transition: color 0.3s;
+}
+
+.dot {
+    margin-right: 8px;
+}
+
+/* Кнопка Тіркелу */
+.submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: #ff9800;
+    color: #000000;
+    border: none;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s;
+}
+
+.submit-btn:hover {
+    background: #ffb74d;
+    transform: translateY(-2px);
+}
+
+/* Ссылка на логин */
+.footer-link {
+    margin-top: 30px;
+    color: #aaaaaa;
+    font-size: 15px;
+}
+
+.footer-link a {
+    color: #ff9800;
+    text-decoration: none;
+}
+
+.footer-link a:hover {
+    text-decoration: underline;
+}
+
+/* Ошибки */
+.error-msg {
+    color: #ff4d4d;
+    font-size: 13.5px;
+    margin-top: 5px;
+    display: block;
+}
+
+
+/* ==================== КРАСИВАЯ РЕГИСТРАЦИЯ ==================== */
+
+.register-wrapper {
+    background: #1f1f1f;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+    max-width: 480px;
+    margin: 60px auto;
+    padding: 50px 45px;
+    text-align: center;
+}
+
+.logo {
+    color: #ff9800;
+    font-size: 52px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+}
+
+.title {
+    color: #ffffff;
+    font-size: 29px;
+    margin-bottom: 40px;
+    font-weight: 500;
+}
+
+.form-group {
+    margin-bottom: 28px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    color: #cccccc;
+    margin-bottom: 9px;
+    font-size: 15.5px;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 16px 18px;
+    background: #2a2a2a;
+    border: 1px solid #555;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 16.5px;
+    transition: all 0.3s;
+}
+
+.auth-input:focus {
+    outline: none;
+    border-color: #ff9800;
+    background: #333;
+    box-shadow: 0 0 0 4px rgba(255, 152, 0, 0.25);
+}
+
+.password-input-wrapper {
+    position: relative;
+}
+
+.toggle-btn, .generate-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 23px;
+    cursor: pointer;
+    color: #bbb;
+}
+
+.toggle-btn { right: 15px; }
+.generate-btn { right: 52px; }
+
+.password-requirements {
+    text-align: left;
+    margin: 18px 0 30px 0;
+    font-size: 14.8px;
+    line-height: 1.95;
+    color: #bbb;
+}
+
+.password-requirements p {
+    margin: 6px 0;
+    transition: color 0.3s;
+}
+
+.dot {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+/* Кнопка */
+.submit-btn {
+    width: 100%;
+    padding: 17px;
+    background: #ff9800;
+    color: #000;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s;
+}
+
+.submit-btn:hover {
+    background: #ffb74d;
+    transform: translateY(-3px);
+}
+
+.footer-link {
+    margin-top: 35px;
+    color: #aaa;
+    font-size: 15.5px;
+}
+
+.footer-link a {
+    color: #ff9800;
+    text-decoration: none;
+}
+
+.error-msg {
+    color: #ff4d4d;
+    font-size: 13.5px;
+    margin-top: 5px;
+}
+
+/* ==================== УЛУЧШЕННАЯ РЕГИСТРАЦИЯ ==================== */
+
+.register-card {
+    background: #1c1c1c;
+    padding: 50px 40px;
+    border-radius: 16px;
+    max-width: 460px;
+    margin: 40px auto;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.logo {
+    color: #ff9800;
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.title {
+    text-align: center;
+    color: white;
+    font-size: 28px;
+    margin-bottom: 35px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    color: #ddd;
+    font-size: 15px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 16px 18px;
+    background: #2a2a2a;
+    border: 1px solid #555;
+    border-radius: 10px;
+    color: white;
+    font-size: 17px;
+}
+
+.auth-input:focus {
+    border-color: #ff9800;
+    background: #333;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.toggle-btn, .generate-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #aaa;
+}
+
+.toggle-btn { right: 15px; }
+.generate-btn { right: 50px; }
+
+.password-requirements {
+    margin: 15px 0 25px 0;
+    font-size: 14.5px;
+    color: #bbb;
+}
+
+.password-requirements p {
+    margin: 5px 0;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: #ff9800;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    background: #ffb74d;
+}
+
+.switch-auth {
+    text-align: center;
+    margin-top: 30px;
+    color: #aaa;
+}
+
+.switch-auth a {
+    color: #ff9800;
+}
+
+
+.register-page {
+    background: #111111;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-card {
+    background: #1c1c1c;
+    padding: 55px 45px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+}
+
+.logo {
+    color: #ff9800;
+    font-size: 55px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.title {
+    text-align: center;
+    color: white;
+    font-size: 28px;
+    margin-bottom: 40px;
+}
+
+.form-group {
+    margin-bottom: 26px;
+}
+
+.form-group label {
+    color: #ddd;
+    font-size: 15px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 16px 18px;
+    background: #2a2a2a;
+    border: 1px solid #555;
+    border-radius: 10px;
+    color: white;
+    font-size: 17px;
+}
+
+.auth-input:focus {
+    border-color: #ff9800;
+    background: #333;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.toggle-btn, .generate-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #bbb;
+}
+
+.toggle-btn { right: 15px; }
+.generate-btn { right: 52px; }
+
+.password-requirements {
+    margin: 15px 0 30px 0;
+    font-size: 15px;
+    color: #bbb;
+}
+
+.password-requirements p {
+    margin: 6px 0;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 17px;
+    background: #ff9800;
+    color: #000;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #ffb74d;
+}
+
+.footer-link {
+    text-align: center;
+    margin-top: 30px;
+    color: #aaa;
+}
+
+.footer-link a {
+    color: #ff9800;
+}

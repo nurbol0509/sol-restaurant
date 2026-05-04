@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <title>Sol Restaurant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+
+<div class="logo">SOL</div>
+
+<div class="right-menu">
+    <button onclick="window.location.href='http://127.0.0.1:8000'" 
+            class="register-btn" style="background:#ff9800; color:#000; padding:10px 20px; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">
+        Личный кабинет
+    </button>
+
+    <a href="http://127.0.0.1:8000/login/" class="auth-btn login" id="loginBtn">
+        Кіру
+    </a>
+
+    <button onclick="registerClick()" class="register-btn" id="registerBtn">
+        Тіркелу
+    </button>
+
+    <!-- Блок, который будет показываться после логина -->
+    <div id="userInfo" style="display: none; align-items: center; gap: 15px; color: #ff9800;">
+        <span id="usernameDisplay" style="font-weight: bold;"></span>
+        <button onclick="logoutUser()" style="background:#e74c3c; color:white; padding:8px 15px; border:none; border-radius:8px; cursor:pointer;">
+            Шығу
+        </button>
+    </div>
+
+    <!-- Кнопка переключения темы -->
+    <button id="theme-toggle-main" class="theme-btn-main">☀️</button>
+
+    
+    <!-- 3 полоска (бургер) -->
+    <div class="burger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
+
+
+<div class="dropdown-menu" id="dropdownMenu">
+
+<a href="index.html">Басты бет</a>
+
+<a href="menu.html">Мәзір</a>
+
+<a href="quiz.html" class="quiz-link">
+    Компьютер викторинасы
+    <small>Біліміңді тексер!</small>
+</a>
+
+</div>
+
+</header>
+
+<section class="hero">
+    <h1>Sol мейрамханасы</h1>
+    <p>Бұл тек тамақ қана емес. Бұл сіздің табағыңыздағы күн мен жердің энергиясы.</p>
+    <a href="menu.html" class="btn">Мәзірді көру</a>
+</section>
+
+<section class="grid">
+    <div>
+        <img src="https://s.04141.com.ua/section/newsInText/upload/images/news/intext/000/055/062/shchekovina-govyazhya-391_639d943263805.jpg" alt="Философия">
+        <h3>Біздің философиямыз</h3>
+        <p>Sol-де біз өнімдерді күрделі соустардың артында жасырмаймыз. Біз фермерлік ет пен маусымдық көкөністерді таңдаймыз, сонда әр ингредиенттің шынайы, табиғи дәмін сезінесіз.</p>
+        <a href="philosophy.html" class="download-video-btn">
+        Толығырақ оқу
+    </a>
+    </div>
+    
+
+<div>
+    <img src="https://static.tildacdn.com/tild3035-6463-4565-b630-303566303738/205b2abd972437b7fe1e.jpg" alt="Мейрамхана интерьері">
+    <h3>Сіздің күш орныңыз</h3>
+    <p>Біз демалуға оңай интерьер жасадық. Көптеген жарық, тірі жасыл өсімдіктер және жұмсақ қызмет көрсету.</p>
+    
+    <a href="Интерер.mp4" download="Sol_Interior.mp4" class="download-video-btn">
+        Видеоны көру 
+    </a>
+</div>
+
+    <div>
+    <img src="https://www.artplast.ru/upload/grain.tables/7b9/sjyhaxugcleyzumn5gjtlzhd31sydm10.jpeg" alt="Доставка">
+    <h3>Sol сіздің үйіңізде</h3>
+    <p>Уақыт жоқ па? Біз мейрамхана атмосферасын сіздің үйіңізге жеткіземіз. Сақтықпен салынған орау тамақтың температурасын және сервировканы сақтайды.</p>
+    
+    <a href="delivery.html" class="download-video-btn">
+        Доставкаға өту
+    </a>
+</div>
+</section>
+
+<section class="promo-banner">
+    <div class="promo-content">
+        <div class="promo-text">
+            <h2>Жеңілдік алғыңыз келе ме?</h2>
+            <p> Ресторан және тағамдар бойынша біліміңізді тексеріп, викторинадан өтіңіз. Барлық сұраққа дұрыс жауап беріп, келесі кешкі асқа <b>15% жеңілдік</b> алыңыз!</p>
+        </div>
+        <div class="promo-action">
+            <a href="quiz.html" class="promo-btn">Викторинаны бастау</a>
+        </div>
+    </div>
+</section>
+
+<!-- Overlay / modal -->
+<div id="diceOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); color:white; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:999;">
+    <h2>🎲 Бағыңды сынап көр!</h2>
+    <p>Официанттың қасында ойна. Кубик қосындысындағы санды болжа.</p>
+    <p>Дурыс тапсан 60% скидка беріледі</p>
+    <label>Кубик саны:</label>
+    <input type="number" id="numDice" min="1" max="10" value="1">
+    
+    <label>Кубик түрі:</label>
+    <select id="diceType">
+        <option value="4">D4</option>
+        <option value="6" selected>D6</option>
+        <option value="8">D8</option>
+        <option value="12">D12</option>
+        <option value="20">D20</option>
+    </select>
+    
+    <input type="number" id="userGuess" min="1" max="1000" placeholder="Болжам" style="width:6%; padding:9px; font-size:18px; text-align:center; margin:15px 0;">
+
+    <button onclick="rollDice()">Ойнау!</button>
+    
+    <div id="diceResult" style="margin-top:15px; font-size:18px;"></div>
+    
+    <button onclick="closeDiceOverlay()" style="margin-top:20px; padding:8px 15px; border-radius:8px; background:orange; color:white; border:none; cursor:pointer;">Жабу</button>
+</div>
+
+
+
+<script>
+// Проверка статуса логина через cookie от Django
+function checkLoginStatus() {
+    // Читаем cookie django_username
+    const cookies = document.cookie.split(';');
+    let username = null;
+    
+    for (let cookie of cookies) {
+        const trimmed = cookie.trim();
+        if (trimmed.startsWith('django_username=')) {
+            username = decodeURIComponent(trimmed.split('=')[1]);
+            break;
+        }
+    }
+
+    const loginBtn = document.getElementById("loginBtn");
+    const registerBtn = document.getElementById("registerBtn");
+    const userInfo = document.getElementById("userInfo");
+    const usernameDisplay = document.getElementById("usernameDisplay");
+
+    if (username) {
+        // Пользователь залогинен
+        if (loginBtn) loginBtn.style.display = "none";
+        if (registerBtn) registerBtn.style.display = "none";
+        if (userInfo) {
+            userInfo.style.display = "flex";
+            if (usernameDisplay) usernameDisplay.textContent = username;
+        }
+    } else {
+        // Пользователь не залогинен
+        if (loginBtn) loginBtn.style.display = "inline";
+        if (registerBtn) registerBtn.style.display = "inline";
+        if (userInfo) userInfo.style.display = "none";
+    }
+}
+
+// Выход из аккаунта
+function logoutUser() {
+    document.cookie = "django_username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    window.location.href = "http://127.0.0.1:8000/logout/";
+}
+
+// Кнопка Тіркелу
+function registerClick() {
+    window.open("http://127.0.0.1:8000/register/", "_blank");
+}
+
+// Запуск проверки при загрузке страницы
+window.addEventListener('load', checkLoginStatus);
+</script>
+
+<!-- ==================== ТОП БЛЮДА ==================== -->
+<section class="top-dishes">
+    <h2>Топ тағамдар</h2>
+    <div class="dishes-grid">
+        <div class="dish-card">
+            <img src="https://menu2go.ru/images/food/551/551_773_20230301150059_8927.jpg" alt="Токпокки">
+            <h3>Токпокки</h3>
+            <p>3800 тг</p>
+        </div>
+        <div class="dish-card">
+            <img src="https://korfood.ru/upload/disk/477/7xljqj2lagvf794ay0ltw3w6jszpel58" alt="Мисо суп">
+            <h3>Мисо суп</h3>
+            <p>2800 тг</p>
+        </div>
+        <div class="dish-card">
+            <img src="https://koreana.rest/upload/article/%D0%BA%D0%B8%D0%BC%D1%87%D0%B8.jpg" alt="Кимчи">
+            <h3>Кимчи</h3>
+            <p>1500 тг</p>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== НАШИ ПОВАРА ==================== -->
+<section class="chefs-section">
+    <h2>Біздің аспаздарымыз</h2>
+    <div class="chefs-grid">
+        <div class="chef-card">
+            <img src="https://thb.tildacdn.com/tild3161-6234-4563-a564-363538316333/-/resize/504x/_MG_4560_1.png" alt="Шеф Алекс">
+            <h3>Шеф Ким</h3>
+            <p>Бас аспаз • 12 жыл тәжірибе • Корей асханасы</p>
+        </div>
+        <div class="chef-card">
+            <img src="https://s14.stc.all.kpcdn.net/putevoditel/serialy/wp-content/uploads/2025/07/ltv4GsUgSv8Ly3I9HClkv4TmJSFlUycbHmqn9o3VxPP-SdW56iqfVoCHedT4UNfPNPzqgXcMTS86T2XpF6oEOIwM.jpg" alt="Шеф Айгерім">
+            <h3>Шеф Айгерім</h3>
+            <p>Десерт шебері • Корей және француз тағамдары</p>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== БРОНИРОВАНИЕ СТОЛА ==================== -->
+<section class="booking-section">
+    <h2>Стол брондау</h2>
+
+    <form id="bookingForm" class="booking-form">
+        <input type="text" id="bookingName" placeholder="Аты-жөніңіз" required>
+        <input type="tel" id="bookingPhone" placeholder="Телефон нөмірі" required>
+        <input type="date" id="bookingDate" required>
+        <input type="time" id="bookingTime" required>
+        
+        <select id="bookingGuests" required>
+            <option value="">Қанша адам?</option>
+            <option value="2">2 адам</option>
+            <option value="3">3 адам</option>
+            <option value="4">4 адам</option>
+            <option value="5">5 адам</option>
+            <option value="6">6 адам және одан көп</option>
+        </select>
+
+        <textarea id="bookingComment" rows="3" placeholder="Қосымша тілектер (мысалы: терезе жанында...)"></textarea>
+
+        <button type="button" onclick="bookTable()" class="book-btn">
+            Брондау
+        </button>
+    </form>
+</section>
+
+<div id="successMessage" class="success-popup">
+    <div class="success-content">
+        <h3> Бронь сәтті жасалды!</h3>
+        <p>Сіздің броньыңыз қабылданды. Біз сізге растау хабарламасын жібереміз.</p>
+        <button onclick="closeSuccess()" class="close-btn">Жабу</button>
+    </div>
+</div>
+
+<!-- ==================== КОНТАКТЫ И КАРТА ==================== -->
+<section class="contact-section">
+    <h2>Бізбен байланыс</h2>
+    <div class="contact-grid">
+        <div>
+            <p><strong>Мекенжай:</strong> Алматы, Абай даңғылы 150</p>
+            <p><strong>Телефон:</strong> +7 (707) 444-82-59</p>
+            <p><strong>Email:</strong> info@solrestaurant.kz</p>
+            <p><strong>Жұмыс уақыты:</strong> 11:00 - 23:00</p>
+        </div>
+        <div>
+            <!-- Здесь можно вставить реальную карту (Яндекс или Google) -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2907.123456789!2d76.9!3d43.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDEyJzAwLjAiTiA3NsKwNTQnMDAuMCJF!5e0!3m2!1sru!2skz!4v123456789" 
+                    width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>Sol Restaurant © 2026</p>
+</footer>
+
+<script src="script.js"></script>
+
+
+
+</body>
+</html>

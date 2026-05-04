@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <title>Тіркелу | SOL</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="register-page">
+
+<div class="register-container">
+    <h1>SOL</h1>
+    <h2>Тіркелу</h2>
+
+    <form id="registerForm">
+        <input type="text" id="name" placeholder="Аты-жөні" required>
+        <small id="nameError" class="error-msg"></small>
+
+        <input type="email" id="email" placeholder="Email" required>
+        <small id="emailError" class="error-msg"></small>
+
+        <div class="password-row">
+            <input type="password" id="password" placeholder="Пароль" required>
+            <button type="button" id="togglePassword" class="eye-btn">👁</button>
+            <button type="button" id="generatePassword" class="gen-btn">🔐</button>
+        </div>
+
+        <!-- Условия пароля -->
+        <div class="password-requirements">
+            <small id="req-length">• Пароль кемінде 8 символ болуы керек</small><br>
+            <small id="req-upper">• Үлкен әріп (A-Z) болуы керек</small><br>
+            <small id="req-number">• Сан (0-9) болуы керек</small><br>
+            <small id="req-special">• Арнайы символ (!@#$%^&*) болуы керек</small>
+        </div>
+
+        <button type="button" onclick="registerUser()" class="register-btn">Тіркелу</button>
+    </form>
+
+    <p class="switch-auth">
+        Аккаунтыңыз бар ма? 
+        <a href="login.html" style="color:#ff9800;">Кіру</a>
+    </p>
+</div>
+
+<script src="register.js"></script>
+</body>
+</html>
