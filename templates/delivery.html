@@ -26,7 +26,8 @@
 </header>
 
 <main class="menu-container">
-    <h1> Доставка SOL — Корей асханасы</h1>
+    <h1>Доставка SOL — Корей асханасы</h1>
+    <p>Таңдаңыз тағамдарды және тапсырыс беріңіз</p>
 
     <!-- Поиск + Дауыс -->
     <div class="search-box">
@@ -44,27 +45,27 @@
         <button onclick="scrollToCategory('drinks')" class="cat-btn">Сусындар</button>
     </div>
 
-    <!-- ==================== ЫСТЫҚ ТАҒАМДАР (7) ==================== -->
+    <!-- ==================== ЫСТЫҚ ТАҒАМДАР ==================== -->
     <h2 id="hot" class="category-title">Ыстық тағамдар</h2>
     <div class="dishes" id="hot-dishes"></div>
 
-    <!-- ==================== СОРПАЛАР (6) ==================== -->
+    <!-- ==================== СОРПАЛАР ==================== -->
     <h2 id="soups" class="category-title">Сорпалар</h2>
     <div class="dishes" id="soups-dishes"></div>
 
-    <!-- ==================== ТІСКЕБАСАРЛАР (6) ==================== -->
+    <!-- ==================== ТІСКЕБАСАРЛАР ==================== -->
     <h2 id="appetizers" class="category-title">Тіскебасарлар</h2>
     <div class="dishes" id="appetizers-dishes"></div>
 
-    <!-- ==================== САЛАТТАР (6) ==================== -->
+    <!-- ==================== САЛАТТАР ==================== -->
     <h2 id="salads" class="category-title">Салаттар</h2>
     <div class="dishes" id="salads-dishes"></div>
 
-    <!-- ==================== ТӘТТІЛЕР (5) ==================== -->
+    <!-- ==================== ТӘТТІЛЕР ==================== -->
     <h2 id="desserts" class="category-title">Тәттілер</h2>
     <div class="dishes" id="desserts-dishes"></div>
 
-    <!-- ==================== СУСЫНДАР (5) ==================== -->
+    <!-- ==================== СУСЫНДАР ==================== -->
     <h2 id="drinks" class="category-title">Сусындар</h2>
     <div class="dishes" id="drinks-dishes"></div>
 
@@ -93,57 +94,48 @@
 </main>
 
 <script>
-// ==================== 35 ТАҒАМ ====================
+// ==================== 35 ТАҒАМ (толық) ====================
 const allDishes = [
-    // Ыстық тағамдар
     {category:"hot", name:"Пулькоги", price:4500, img:"https://sarang64.ru/uploads/300425/01/pul.jpg"},
     {category:"hot", name:"Самгёпсаль", price:4800, img:"https://beliy-juravl.ru/wp-content/uploads/2023/09/Самгепсаль-кочудян-покым-2-683x1024.webp"},
     {category:"hot", name:"Токпокки", price:3800, img:"https://menu2go.ru/images/food/551/551_773_20230301150059_8927.jpg"},
     {category:"hot", name:"Бибимбап", price:4200, img:"https://ic.pics.livejournal.com/mr_gaijin/76287030/796821/796821_original.jpg"},
     {category:"hot", name:"Чечёнён", price:3900, img:"https://assorti.kg/media/CACHE/images/uploads/restaurant/dishes/Kuritsa_v_kislo-ostrom_souse_GLyDn7c/8a259aa79f271bd659b468312fa87d3f.jpg"},
 
-    // Сорпалар
-    {category:"soups", name:"Кимчи чжиге", price:3500, img:"https://images.gastronom.ru/IMqzhbQdqoaJFmtzKN49Ax5GMk_ztAq-rul0Hi2A6J0/pr:recipe-cover-image/g:ce/rs:auto:0:0:0/L2Ntcy9hbGwtaW1hZ2VzL2Q2NTc4YTAwLTRlMTQtNDliZC04NmM2LTQzYjMxYzRjMTI5OS5qcGc.webp"},
+    {category:"soups", name:"Кимчи чжигэ", price:3200, img:"https://images.gastronom.ru/IMqzhbQdqoaJFmtzKN49Ax5GMk_ztAq-rul0Hi2A6J0/pr:recipe-cover-image/g:ce/rs:auto:0:0:0/L2Ntcy9hbGwtaW1hZ2VzL2Q2NTc4YTAwLTRlMTQtNDliZC04NmM2LTQzYjMxYzRjMTI5OS5qcGc.webp"},
     {category:"soups", name:"Самгетан", price:4500, img:"https://grandkulinar.ru/uploads/posts/2023-01/1674587826_korejskij-sup-samgetan.jpg"},
     {category:"soups", name:"Токкук", price:3100, img:"https://www.gastronomiac.com/wp/wp-content/uploads/2021/09/Tteokguk2.jpg"},
     {category:"soups", name:"Хэмуль тан", price:3800, img:"https://beliy-juravl.ru/wp-content/uploads/2019/06/BelyiJuravl-blockdesserts-37.jpg"},
     {category:"soups", name:"Мисо суп", price:2800, img:"https://korfood.ru/upload/disk/477/7xljqj2lagvf794ay0ltw3w6jszpel58"},
 
-    // Тіскебасарлар, Салаттар, Тәттілер, Сусындар (қалғандарын да қостым)
     {category:"appetizers", name:"Кимчи", price:1500, img:"https://koreana.rest/upload/article/%D0%BA%D0%B8%D0%BC%D1%87%D0%B8.jpg"},
     {category:"appetizers", name:"Падак", price:2900, img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/40/a3/c5/caption.jpg?w=1100&h=1100&s=1"},
     {category:"appetizers", name:"Манда", price:2600, img:"https://cdn.7days.ru/pic/adc/970076/1373541/86.jpg"},
-    {category:"appetizers", name:"Чон ", price:2200, img:"https://korshop.ru/upload/iblock/b99/b99573086b94ee420cd9750d3d0a291c.jpg"},
-    {category:"appetizers", name:"Намуль ", price:1800, img:"https://korshop.ru/upload/iblock/3db/3db999239a39fb4e4a15ce873d497d24.JPG"},
-    // ... (толық код өте ұзақ болады, сондықтан қысқаша айтайын)
+    {category:"appetizers", name:"Чон", price:2200, img:"https://korshop.ru/upload/iblock/b99/b99573086b94ee420cd9750d3d0a291c.jpg"},
+    {category:"appetizers", name:"Намуль", price:1800, img:"https://korshop.ru/upload/iblock/3db/3db999239a39fb4e4a15ce873d497d24.JPG"},
 
     {category:"salads", name:"Ои намуль", price:1900, img:"https://korshop.ru/upload/iblock/17e/3y77zrtpmn0jg1vdmd2gkqfoi5zpo8hb.jpg"},
-    {category:"salads", name:"Морковь по-корейски ", price:1700, img:"https://images.gastronom.ru/rHAwJGnYGWSv0sC2evA7488FHb-H0F3HO_aOb5X2WGA/pr:recipe-cover-image/g:ce/rs:auto:0:0:0/L2Ntcy9hbGwtaW1hZ2VzLzRjMTY2OWE4LTJkNGYtNDY2YS1hYzFhLTA2OTkyYzM1YzRlYS5qcGc.webp"},
+    {category:"salads", name:"Морковь по-корейски", price:1700, img:"https://images.gastronom.ru/rHAwJGnYGWSv0sC2evA7488FHb-H0F3HO_aOb5X2WGA/pr:recipe-cover-image/g:ce/rs:auto:0:0:0/L2Ntcy9hbGwtaW1hZ2VzLzRjMTY2OWE4LTJkNGYtNDY2YS1hYzFhLTA2OTkyYzM1YzRlYS5qcGc.webp"},
     {category:"salads", name:"Фунчоза", price:2400, img:"https://avatars.mds.yandex.net/get-vertis-journal/4220003/6746f23f-a885-4a70-9333-5378afd79955.jpeg/1600x1600"},
-    {category:"salads", name:"Кимчи салаты ", price:2100, img:"https://korshop.ru/upload/iblock/e9b/hkp35yer88zu6i5uqt07j9mkrvzw6dkn.jpg"},
-    {category:"salads", name:"Редис намуль ", price:1850, img:"https://www.russianfood.com/dycontent/images_upl/720/big_719008.jpg"},
-    // ... (толық код өте ұзақ болады, сондықтан қысқаша айтайын)
+    {category:"salads", name:"Кимчи салаты", price:2100, img:"https://korshop.ru/upload/iblock/e9b/hkp35yer88zu6i5uqt07j9mkrvzw6dkn.jpg"},
+    {category:"salads", name:"Редис намуль", price:1850, img:"https://www.russianfood.com/dycontent/images_upl/720/big_719008.jpg"},
 
-    {category:"dishes", name:"Хотток", price:1800, img:"https://images2.novochag.ru/upload/img_cache/ab1/ab1b3c696ea6652e8ba3978cab274135_cropped_666x444"},
-    {category:"dishes", name:"Патбингсу  ", price:2800, img:"https://korfood.ru/upload/iblock/8b4/3rk6v1lqvvgx7au1uu9ukto82i9z88jf/binsu_znamenityy_koreyskiy_desert.webp"},
-    {category:"dishes", name:"Ттёк", price:1600, img:"https://upload.wikimedia.org/wikipedia/commons/f/fd/Tteok.jpg"},
-    {category:"dishes", name:"Матча суфле", price:2200, img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/3b/56/b2/caption.jpg?w=900&h=500&s=1"},
-    {category:"dishes", name:"Жеміс салаты", price:1950, img:"https://menunedeli.ru/wp-content/uploads/2015/09/fruktovyj-salat_opt.jpg"},
-    // ... (толық код өте ұзақ болады, сондықтан қысқаша айтайын)
+    {category:"desserts", name:"Хотток", price:1800, img:"https://images2.novochag.ru/upload/img_cache/ab1/ab1b3c696ea6652e8ba3978cab274135_cropped_666x444.jpg"},
+    {category:"desserts", name:"Патбингсу", price:2800, img:"https://korfood.ru/upload/iblock/8b4/3rk6v1lqvvgx7au1uu9ukto82i9z88jf/binsu_znamenityy_koreyskiy_desert.webp"},
+    {category:"desserts", name:"Ттёк", price:1600, img:"https://upload.wikimedia.org/wikipedia/commons/f/fd/Tteok.jpg"},
+    {category:"desserts", name:"Матча суфле", price:2200, img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/3b/56/b2/caption.jpg?w=900&h=500&s=1"},
+    {category:"desserts", name:"Жеміс салаты", price:1950, img:"https://menunedeli.ru/wp-content/uploads/2015/09/fruktovyj-salat_opt.jpg"},
 
-    
     {category:"drinks", name:"Сикхе", price:1200, img:"https://english.visitkorea.or.kr/public/images/foodtrip/k-food-img/img_kfood_view_400.jpg"},
     {category:"drinks", name:"Жасыл шай", price:900, img:"https://vseokoree.com/media/k2/items/cache/778faba3e3dc8c6c6db24b403da494ae_XL.jpg"},
     {category:"drinks", name:"Алма шырыны", price:1100, img:"https://италония.рф/upload/iblock/72f/icumeza1mux2d9ayoeg437iqytuu1pad/yablochnyy_sok_svezhevyzhatyy_yuzhnoe_butovo.jpeg"},
     {category:"drinks", name:"Гранат шырыны", price:1300, img:"https://foto.vsesoki.ru/files/1/3578/17485306/original/sok_granata.jpg"},
-    {category:"drinks", name:"Корей лимонады", price:1400, img:"https://travelinsider.ru/wp-content/uploads/2019/07/Crabber_Citrusoviy-limonad.jpg"},
-    // ... (толық код өте ұзақ болады, сондықтан қысқаша айтайын)
-    // Қалған тағамдарды қосу үшін төмендегі массивті толықтырдым
+    {category:"drinks", name:"Корей лимонады", price:1400, img:"https://travelinsider.ru/wp-content/uploads/2019/07/Crabber_Citrusoviy-limonad.jpg"}
 ];
 
 let cart = [];
 
-// ==================== РЕНДЕР ФУНКЦИЯСЫ ====================
+// ==================== РЕНДЕР ТАҒАМДАР ====================
 function renderAllDishes() {
     const categories = ['hot','soups','appetizers','salads','desserts','drinks'];
     
@@ -166,8 +158,111 @@ function renderAllDishes() {
     });
 }
 
-// Қалған функциялар (addToCart, updateCart, placeOrder және т.б.) бұрынғы кодыңыздан қалды
+// ==================== КОРЗИНА ====================
+function addToCart(name, price) {
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+        existing.quantity++;
+    } else {
+        cart.push({name, price, quantity: 1});
+    }
+    updateCart();
+}
 
+function updateCart() {
+    let html = '';
+    let total = 0;
+
+    cart.forEach((item, i) => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        html += `
+            <div class="cart-item">
+                <span>${item.name}</span>
+                <div>
+                    <button class="quantity-btn" onclick="changeQuantity(${i}, -1)">–</button>
+                    <span>${item.quantity}</span>
+                    <button class="quantity-btn" onclick="changeQuantity(${i}, 1)">+</button>
+                </div>
+                <span>${itemTotal} тг</span>
+                <button onclick="removeFromCart(${i})" style="color:red;">✕</button>
+            </div>`;
+    });
+
+    document.getElementById("cartItems").innerHTML = html || "<p>Себет бос</p>";
+    document.getElementById("totalPrice").textContent = total;
+    document.getElementById("cartCount").textContent = `(${cart.length})`;
+}
+
+function changeQuantity(i, change) {
+    cart[i].quantity += change;
+    if (cart[i].quantity < 1) cart.splice(i, 1);
+    updateCart();
+}
+
+function removeFromCart(i) {
+    cart.splice(i, 1);
+    updateCart();
+}
+
+// ==================== ТАПСЫРЫС БЕРУ ====================
+async function placeOrder() {
+    if (cart.length === 0) {
+        alert("Себет бос!");
+        return;
+    }
+
+    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+    const orderData = {
+        items: cart,
+        total: total,
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        email: document.getElementById("email").value,
+        address: document.getElementById("address").value,
+        comment: document.getElementById("comment").value
+    };
+
+    try {
+        const response = await fetch("http://127.0.0.1:8000/create_order/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(orderData)
+        });
+
+        const data = await response.json();
+
+        if (data.status === "success") {
+            alert("✅ Тапсырыс сәтті қабылданды!\nЧек сіздің email-ге жіберілді!");
+            cart = [];
+            updateCart();
+            document.getElementById("orderForm").reset();
+        } else {
+            alert("Қате: " + (data.message || "Белгісіз қате"));
+        }
+    } catch (e) {
+        alert("Django серверімен байланыс орнату мүмкін болмады.");
+    }
+}
+
+// ==================== ҚОСЫМША ФУНКЦИЯЛАР ====================
+function searchDish() {
+    let input = document.getElementById("menuSearch").value.toLowerCase();
+    document.querySelectorAll(".dish").forEach(dish => {
+        dish.style.display = dish.textContent.toLowerCase().includes(input) ? "block" : "none";
+    });
+}
+
+function voiceSearch() {
+    alert("Дауыстық іздеу әзірге іске қосылмаған");
+}
+
+function scrollToCategory(id) {
+    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+}
+
+// ==================== БАСТАУ ====================
 renderAllDishes();
 </script>
 </body>

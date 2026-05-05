@@ -13,14 +13,14 @@ app = Flask(__name__,
 
 CORS(app)
 
-# ====================== ГЛАВНЫЕ СТРАНИЦЫ ======================
+# ====================== СТРАНИЦЫ ======================
 @app.route('/')
 def index():
     return render_template('index.html')
 
 @app.route('/<path:page>')
-def render_any_page(page):
-    if page.endswith('.html') or page in ['index', 'menu', 'quiz', 'register', 'login', 'delivery', 'philosophy']:
+def render_page(page):
+    if page.endswith(('.html')) or page in ['index', 'menu', 'quiz', 'register', 'login', 'delivery', 'philosophy']:
         if not page.endswith('.html'):
             page += '.html'
         try:

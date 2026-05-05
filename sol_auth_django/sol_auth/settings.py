@@ -142,4 +142,4 @@ STATICFILES_DIRS = [
 
 
 # Groq API
-# GROQ_API_KEY = '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'  # ← Замени на свой реальный ключ
+GROQ_API_KEY = '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'  # ← Замени на свой реальный ключ
