@@ -1,4 +1,5 @@
-from flask import Flask, request, jsonify, render_template, send_from_directory
+from flask import Flask, request, jsonify, render_template
+from flask import Flask, render_template, send_from_directory
 from flask_cors import CORS
 import re
 import random
@@ -9,29 +10,52 @@ import os
 
 app = Flask(__name__, 
             template_folder='templates',
-            static_folder='static')
+           
 
+ static_folder='static')   # ← важно!
 CORS(app)
 
-# ====================== СТРАНИЦЫ ======================
+# Главная страница
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/<path:page>')
-def render_page(page):
-    if page.endswith(('.html')) or page in ['index', 'menu', 'quiz', 'register', 'login', 'delivery', 'philosophy']:
-        if not page.endswith('.html'):
-            page += '.html'
-        try:
-            return render_template(page)
-        except:
-            return "Page not found", 404
-    return "File not found", 404
+@app.route('/index.html')
+def index_html():
+    return render_template('index.html')
 
-# ====================== API ======================
+# Другие страницы
+@app.route('/menu.html')
+def menu():
+    return render_template('menu.html')
+
+@app.route('/quiz.html')
+def quiz():
+    return render_template('quiz.html')
+
+@app.route('/register.html')
+def register_page():
+    return render_template('register.html')
+
+@app.route('/login.html')
+def login_page():
+    return render_template('login.html')
+
+@app.route('/delivery.html')
+def delivery():
+    return render_template('delivery.html')
+
+@app.route('/philosophy.html')
+def philosophy():
+    return render_template('philosophy.html')
+
+@app.route('/philosophy')
+def philosophy_short():
+    return render_template('philosophy.html')
+
 USER_DATA_FILE = "users.json"
 
+# 📝 Тіркелу
 @app.route("/register", methods=["POST"])
 def register():
     new_user = request.json
@@ -40,35 +64,59 @@ def register():
         with open(USER_DATA_FILE, "r", encoding="utf-8") as file:
             try:
                 users_list = json.load(file)
-            except:
+            except json.JSONDecodeError:
                 users_list = []
+
     users_list.append(new_user)
     with open(USER_DATA_FILE, "w", encoding="utf-8") as file:
         json.dump(users_list, file, ensure_ascii=False, indent=4)
-    return jsonify({"status": "success", "message": "Тіркелу сәтті аяқталды!"})
 
-@app.route("/login", methods=["POST"])
-def login():
-    data = request.json
-    email = data.get("email")
-    password = data.get("password")
-    if not os.path.exists(USER_DATA_FILE):
-        return jsonify({"status": "error", "message": "Пайдаланушы табылмады"})
-    with open(USER_DATA_FILE, "r", encoding="utf-8") as file:
-        try:
-            users = json.load(file)
-        except:
-            return jsonify({"status": "error", "message": "База қате"})
-    for user in users:
-        if user.get("email") == email and user.get("password") == password:
-            return jsonify({"status": "success", "message": "Қош келдіңіз!"})
-    return jsonify({"status": "error", "message": "Email немесе пароль қате!"})
+    return jsonify({"status": "success", "message": "Деректер сақталды!"})
 
+# 🔐 Пароль генерация
 @app.route("/generate_password")
 def generate_password():
     characters = string.ascii_letters + string.digits + "!@#$%^&*"
     password = ''.join(random.choice(characters) for _ in range(10))
     return jsonify({"password": password})
+
+# 🔎 Пароль тексеру
+@app.route("/check_password", methods=["POST"])
+def check_password():
+    data = request.json
+    password = data.get("password", "")
+    errors = []
+    if len(password) < 8: errors.append("Кемінде 8 символ керек")
+    if not re.search("[A-Z]", password): errors.append("Бас әріп керек")
+    if not re.search("[0-9]", password): errors.append("Сан керек")
+    if not re.search("[!@#$%^&*]", password): errors.append("Арнайы символ керек")
+
+    if len(errors) == 0:
+        return jsonify({"status":"strong"})
+    else:
+        return jsonify({"status":"weak","errors":errors})
+
+# 🔑 Логин тексеру
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.json
+    email = data.get("email")
+    password = data.get("password")
+
+    if not os.path.exists(USER_DATA_FILE):
+        return jsonify({"status": "error", "message": "Пайдаланушы табылмады (база бос)"})
+
+    with open(USER_DATA_FILE, "r", encoding="utf-8") as file:
+        try:
+            users = json.load(file)
+        except:
+            return jsonify({"status": "error", "message": "База қате"})
+
+    for user in users:
+        if user["email"] == email and user["password"] == password:
+            return jsonify({"status": "success", "message": "Қош келдіңіз!", "user": user.get("name", "Пайдаланушы")})
+
+    return jsonify({"status": "error", "message": "Email немесе пароль қате!"})
 
 # 🎲 Кубик
 last_played = {}
@@ -81,22 +129,23 @@ def roll_dice():
     now = time.time()
     if email in last_played and (now - last_played[email] < 60):
         return jsonify({"status": "wait", "message": "Күте тұрыңыз!"})
+    
     results = [random.randint(1, dice_type) for _ in range(num_dice)]
     last_played[email] = now
     return jsonify({"status":"ok", "results": results, "total": sum(results)})
 
-# ====================== СТАТИЧЕСКИЕ ФАЙЛЫ ======================
+# Статические файлы (стили, скрипты, картинки и т.д.)
 @app.route('/static/<path:filename>')
 def serve_static(filename):
     return send_from_directory('static', filename)
 
 @app.route('/<path:filename>')
-def serve_files(filename):
+def serve_static(filename):
     if filename.endswith(('.css', '.js', '.png', '.jpg', '.jpeg', '.webp', '.pdf', '.mp4')):
         return send_from_directory('.', filename)
     return "File not found", 404
 
-# ====================== ЗАПУСК ======================
+# МЫНАУ ЕҢ СОҢЫНДА ТҰРУЫ ТИІС!
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 5000))   # Render және басқа хостингтер үшін
     app.run(host="0.0.0.0", port=port, debug=False)
